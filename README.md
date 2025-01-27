@@ -1,8 +1,3 @@
-# Markdown template
-Below is a template Readme.md file. Use this file as a basic splash page and data dictionary for public facing repositories that are associated with specific projects and/or publications.
-
-
-
 # Project Title
 Data associated with the manuscript "**Project title**" by **Author** et al. (**Year, manuscript DOI if available**)
 
@@ -15,19 +10,6 @@ Data associated with the manuscript "**Project title**" by **Author** et al. (**
 This project includes several folders with additonal data and resources used in the analysis of this work. 
 
 ### Directory:
-- ./Fig1 ##Subfolder with scripts and data associated with Figure 1
-  - File name.R ##Use a descriptive file name and provide a short 1-2 sentence description here
-  - File name.py ##Use a descriptive file name and provide a short 1-2 sentence description here
-  - File name.txt ##Use a descriptive file name and provide a short 1-2 sentence description here
-  - File name.nw ##Use a descriptive file name and provide a short 1-2 sentence description here. 
-- ./Fig2 ##Subfolder with scripts and data associated with Figure 2
-  - File name.R ##Use a descriptive file name and provide a short 1-2 sentence description here
-  - File name.py ##Use a descriptive file name and provide a short 1-2 sentence description here
-  - File name.txt ##Use a descriptive file name and provide a short 1-2 sentence description here
-  - File name.nw ##Use a descriptive file name and provide a short 1-2 sentence description here.
-  </br></br> **NOTE:** ##Additional notes relevant to this subfolder can be placed in this area. </br></br>
-- ./Fig3 ##Subfolder with scripts and data associated with Figure 3
-  - File name.R ##Use a descriptive file name and provide a short 1-2 sentence description here
 - ./Scripts: ##Subfolder with additional scripts and data associated with this analysis
   - file.sh
   - file.py
