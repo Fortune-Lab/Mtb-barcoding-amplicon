@@ -30,6 +30,7 @@ dependencies:
   - ncurses=6.5=h2d0b736_2
   - openssl=3.4.0=h7b32b05_1
   - ossuuid=1.6.2=h5888daf_1001
+  - parallel=20241222=ha770c72_0
   - perl=5.32.1=7_hd590300_perl5
   - perl-alien-build=2.84=pl5321h7b50bb2_0
   - perl-alien-libxml2=0.17=pl5321h577a1d6_1
