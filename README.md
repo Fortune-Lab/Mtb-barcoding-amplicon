@@ -13,7 +13,7 @@ This project includes two perl scripts to process the fastq files in the analysi
 - ./scripts:
   - BarcodeReader.plx
   - FindThreshold.plx
-  - 
+    
 ### Tool versions:
   - Requires seqtk https://github.com/lh3/seqtk and the perl module Math::Derivative https://metacpan.org/pod/Math::Derivative to be installed on your path.
 
