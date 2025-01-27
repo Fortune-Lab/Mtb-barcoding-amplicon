@@ -7,7 +7,7 @@ Data associated with the manuscript "CD4 T cells and CD8α+ lymphocytes are nece
 **Please don't hesitate to contact us if there are any issues.**
 
 ## File Guide
-This project includes two scripts to process the fastq files in the analysis of this work. 
+This project includes two perl scripts to process the fastq files in the analysis of this work. 
 
 ### Directory:
 - ./scripts:
@@ -15,7 +15,7 @@ This project includes two scripts to process the fastq files in the analysis of 
   - FindThreshold.plx
   - 
 ### Tool versions:
-  - Requires seqtk and the perl module Math::Derivative to be installed on your path.
+  - Requires seqtk https://github.com/lh3/seqtk and the perl module Math::Derivative https://metacpan.org/pod/Math::Derivative to be installed on your path.
 
 ### Citations:
   - Skip if this information is already in a methods section or in the script.
