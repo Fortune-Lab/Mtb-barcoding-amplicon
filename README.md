@@ -22,7 +22,7 @@ This project includes two perl scripts to process the fastq files in the analysi
   - `conda env create -f barcoding.yml`
   - In the script FindThreshold.plx change the path in `use lib '/n/boslfs02/LABS/sfortune_lab/Lab/envs/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
 
-###Running the code:
+### Running the code:
 
 
 ### DOI of this repository: (Link to the Zenodo DOI, generate a unqiue DOI for this repo)
