@@ -6,8 +6,8 @@ use warnings;
 use Data::Dumper;
 use File::Find;
 use File::Basename;
-#use Math::Derivative qw(Derivative1 Derivative2);
 use Cwd;
+
 my %qtag_counts = ();
 
 my $BARCODE_MOTIF = "CGA[ACTG]{3}C[ACTG]{4}AATTCGATGG";
@@ -52,37 +52,23 @@ sub get_files {
 	my @files = glob("*.fastq.gz");
 	foreach my $file (@files) {
 		my @array = split/\_/, $file;
-		my $string = join("_", @array[0,1]);
-		push @{$hash{$string}}, $file;
+		#my $string = join("_", @array[0,1]);
+		push @{$hash{$array[0]}}, $file;
 	}
 	return %hash;
 }
 
 
 foreach my $reads (keys %FILES) {
-	#next unless scalar(@{$FILES{$reads}}) == '2';
 	print "Processing $reads\n";
 	my %UNKNOWN = ();
 	my %data = ();
-	my $data_file = $reads . "_" . 'reads.csv';
+	my $data_file = $reads . "_" . 'reads.tsv';
 	my $chimera_file = $reads . "_" . 'chimera_data.txt';
-	#my $threshold_file = $reads . "_" . 'threshold_data.txt';
-	my $mcount_barcode_file = $reads . "_" . 'mcount_barcode_data.txt';
-	my $summary_file = $reads . "_" . 'summary_data.txt';
-	my $novel_qtags = $reads . "_" . 'novel_qtags_data.txt';
-	my $umi_distribution = $reads . "_" . "umi_distribution.txt";
 
 	open my($of1), ">$chimera_file";
-	#open my($of2), ">$threshold_file";
-	open my($of3), ">$mcount_barcode_file";
-	open my($of4), ">$summary_file";
-	open my($of9), ">$novel_qtags";
-	open my($of5), ">$umi_distribution";
 	open my($of6), ">$data_file";
 	print $of1 join("\t", 'run', 'total_reads', 'match_all_features_counts'), "\n";
-	#print $of2 join("\t", 'run', 'qtag', 'index', 'barcode', 'counts', 'norm', 'dydx', 'dy2dx2'), "\n";
-	print $of3 join("\t", 'id', 'mcount_barcode', 'qtag', 'count'), "\n";
-	print $of4 join("\t", 'umi', 'barcode', 'qtag', 'counts'), "\n";
  
 	open my($fh1), "seqtk seq -A ${$FILES{$reads}}[0] | ";
 
@@ -95,14 +81,12 @@ foreach my $reads (keys %FILES) {
 	while(defined (my $line1 = <$fh1>) ) {
 		next if $line1 =~ /^\>/;
 		chomp $line1;
-		#chomp $line2;
 		my @tags = ();
 		my @features = ();
 		my $qtag = 'undef';
 		$counter++;
 		if ( $line1 =~ /($MCOUNT_MOTIF)([ATCG]+)($BARCODE_MOTIF)([ATCG]+TGGTGTTCAAGCTT)([ATCG]{12})/) {
 			my @test = bin_qtags($5, keys %qtags);
-			#next unless scalar(@test) == '1';
 			if (scalar(@test) == '1') {
 				
 				push @tags, $1;
@@ -163,47 +147,12 @@ foreach my $reads (keys %FILES) {
 		}
 	}
 
-	foreach my $umi (sort {$a <=> $b }keys %COUNTS) {
-		print $of5 join("\t", $reads, $umi, $COUNTS{$umi}), "\n";
-		}
-	
-
-	foreach my $item (keys %UNKNOWN){
-		print $of9 join("\t", $reads, $item, $UNKNOWN{$item}), "\n";
-	}
-
-	foreach my $item (keys %feature_counts) {
-		my @array = split/\,/, $item;
-		my $percent = '100' * ($feature_counts{$item} / $counter);
-                my $rounded = sprintf("%.4f", $percent);
-		print $of4 join("\t", $reads, @array, $feature_counts{$item}, $counter, $rounded), "\n";
-	}
-
 	foreach my $bc (keys %chimera) {
 		my @q = keys %{$chimera{$bc}};
 		next if scalar(@q) == '1';
 		for my $item (@q) {
        			print $of1 join("\t", $reads, $bc, $item, $chimera{$bc}{$item}), "\n";
         	}
-	}
-	my $cnt = '0';
-	foreach my $tag (keys %alt) {
-		next unless scalar(keys %{$alt{$tag}})  > 1;
-		my @stuff = keys %{$alt{$tag}};
-		$cnt++;
-		my $flag = '0';
-		foreach my $bc ( keys %{$alt{$tag}} ) {
-			for my $item (@stuff) { 
-				if ($alt{$tag}{$item} >= '10') {
-					$flag++;
-				}
-	
-			}
-			if ($flag > '0' ) {
-                		print $of3 join("\t", $cnt, $tag, $bc, $alt{$tag}{$bc}), "\n";
-        		}
-
-		}
 	}
 	###umi barcode filter
 	foreach my $qtag ( keys %data) {
@@ -220,11 +169,6 @@ foreach my $reads (keys %FILES) {
 
 }
 
-#foreach my $barcode ( keys %BARCODE_COUNTS) {
-#        foreach my $read ( keys %{$BARCODE_COUNTS{$barcode}}) {
-#                print join("\t", $barcode, $read, $BARCODE_COUNTS{$barcode}{$read}), "\n";
-#        }
-#}
 
 sub get_mcounts {
 	my %data = @_;
@@ -261,11 +205,8 @@ sub remove_barcodes {
                 for (my $j = $i +1; $j <= $#barcodes; $j++) {
                 	next if $cache{$j};
                         my $mm = hamming($barcodes[$i][1], $barcodes[$j][1]);
-                        #if ($mm == '1' or $mm == '0') {
 			if ($mm <= '1') {
-			#print join("\t", @{$barcodes[$i]}). "\n";	
 				print $df join("\t", $run, $barcodes[$i][1], $barcodes[$i][0], $barcodes[$j][1], $barcodes[$j][0], $mm), "\n";
-				#$barcodes[$i][0] += $barcodes[$j][0];
 				$cache{$j}++;
                         }
                 }
@@ -296,9 +237,6 @@ sub remove_barcodes_edit {
                         if ($mm <= '1') {
                                 print $df join("\t", $run, $barcodes[$i][1], $barcodes[$i][0], $barcodes[$j][1], $barcodes[$j][0], $mm), "\n";
                                 $cache{$j}++;
-                                #next if $add eq 'FALSE';
-                                #next if $mm == '1';#Adding one offs to parent
-                                #$barcodes[$i][0] += $barcodes[$j][0];
                         }
                 }
         }
