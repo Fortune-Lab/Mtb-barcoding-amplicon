@@ -1,18 +1,14 @@
 #!/usr/bin/env perl
 
-use lib '/n/boslfs02/LABS/sfortune_lab/Lab/scripts';
-use Module::Derivative qw(Derivative1 Derivative2);
-#use Derivative qw(Derivative1 Derivative2);
+use lib '/n/boslfs02/LABS/sfortune_lab/Lab/envs/barcoding/lib/perl5/site_perl/';
+use Math::Derivative qw(Derivative1 Derivative2);
 use strict;
 use warnings;
 use Data::Dumper;
 use File::Find;
 use File::Basename;
-#use Math::Derivative qw(Derivative1 Derivative2);
 use Cwd;
 use Getopt::Long 'HelpMessage';
-#use Statistics::Diversity::Shannon;
-
 
 GetOptions(
 	'min_reads=i' => \(my $MIN_READS = '10000'),
@@ -68,8 +64,8 @@ sub get_files {
 	my @files = glob("*reads.csv");
 	foreach my $file (@files) {
 		my @array = split/\_/, $file;
-		my $string = join("_", @array[0,1]);
-		$hash{$string} = $file;
+		#my $string = join("_", @array[0,1]);
+		$hash{$array[0]} = $file;
 	}
 	return %hash;
 }
@@ -116,8 +112,6 @@ sub filter_umi {
 	if ($FILTER eq 'TRUE') {
 		filter_umi(\%data, \%umi, $FILTER);
 	}
-	#my $out_file = $run . '_' . 'threshold_data.csv';
- 	#open my($of), ">$out_file";
 	my %mcounts = get_mcounts(%data);
 	#my %mcounts = %data;
 	my @values = ();
@@ -172,24 +166,16 @@ sub filter_umi {
 		
         my @dydx=Derivative1(\@x,\@y);
         my @d2ydx2=Derivative2(\@x,\@y,);
-	my @dydxt=Derivative1(\@xt,\@yt);                                                                                                                                                                          my @d2ydx2t=Derivative2(\@xt,\@yt,);
+	my @dydxt=Derivative1(\@xt,\@yt);                                                                                                                                                                          	  my @d2ydx2t=Derivative2(\@xt,\@yt,);
 
 	my @results = ();
 	
         for my $j (1..$#dydx) {
-		#my $chimera = 'NA';
-		#if (defined $chimera_percent{$run}{$values[$j][1]}) {
-		#	$chimera =  $chimera_percent{$run}{$values[$j][1]};
-		#} 
 		if (defined $d2ydx2t[$j]) {
-			#my $qbid = $values[$j][2] .  $values[$j][1];
 			my $qbid = $values[$j][2] . $values[$j][1];	
-			#push @results, [$run, $values[$j][2], $j, $values[$j][1], $values[$j][0], $y[$j], $dydx[$j], $d2ydx2[$j], $d2ydx2t[$j], $percent[$j]];
-			#printf("%.3f", 3.1415926535);
 			my $rounded = sprintf "%.0f", $percent[$j];
 			push @results, [$run, $j, $qbid, $values[$j][0], $y[$j], $dydx[$j], $d2ydx2[$j], $d2ydx2t[$j], $rounded, $values[$j][1]];
 		}else {
-			#push @results, [$run, $values[$j][2], $j, $values[$j][1], $values[$j][0], $y[$j], $dydx[$j], $d2ydx2[$j], '0', $percent[$j]];
 			my $qbid = $values[$j][2] .  $values[$j][1];
 			my $rounded = sprintf "%.0f", $percent[$j];
 			push @results, [$run, $j, $qbid, $values[$j][0], $y[$j], $dydx[$j], $d2ydx2[$j], '0', $rounded, $values[$j][1]];
@@ -198,13 +184,8 @@ sub filter_umi {
 	my @z = return_list('6', @results);
 	my @u = return_list('7', @results);
 
-	#my @header = qw( run   qtag    index   barcode counts  norm    dydx dy2dx2 dy2dx2_cutoff percent percent_chimera);
-#	my @header = qw( run	index   qbid	counts  norm    dydx dy2dx2 dy2dx2_cutoff percent percent_chimera);
-#	print $of join(",", @header), "\n";
 	my $flag2 = 'TRUE';
 	for my $stack ( @results) {
-		#my $flag = 'TRUE';
-		#if ($stack->[8] == $u[0]) {
 		###add conditional for $stack->[8] == $u[0] or $stack->[7] == $z[0]
 		my $chimera = '0';
 		##########BROKEN need barcode
@@ -213,11 +194,10 @@ sub filter_umi {
                 }
 
 		if ($stack->[7] == $u[0] and $stack->[6] == $z[0]) {
-			print $of join(",", @$stack[0..8], $chimera, $flag2, $stack->[1]), "\n";
+			print $of join(",", @$stack[0..8], $chimera, $flag2), "\n";
+			#print $of join(",", @$stack[0..8], $chimera, $flag2, $stack->[1]), "\n";
 			$flag2 = 'FALSE';
 		}elsif ( $stack->[7] == $u[0] or $stack->[6] == $z[0]) {
-			#print $of join(",", @$stack, $chimera, '*****', $stack->[1], 'warning'), "\n";
-			#print $of join(",", @$stack, $chimera, $flag2, $stack->[1]), "\n";
 			 print $of join(",", @$stack[0..8], $chimera, $flag2, 'ALT'), "\n";
 			$flag2 = 'FALSE';
 		}else {
