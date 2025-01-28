@@ -23,13 +23,13 @@ This project includes two perl scripts to process the fastq files in the analysi
   - In the script FindThreshold.plx change the path in `use lib '/n/boslfs02/LABS/sfortune_lab/Lab/envs/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
 
 ### Running the code:
-`mkdir myFolder && cd myFolder`
-`conda activate barcoding`
-`cp /path_to/BarcodeReader.plx .`
-`cp /path_to/FindThreshold.plx .`
-`mv fastq_files . `
-`perl BarcodeReader.plx`
-`perl FindThreshold.plx`
+-`mkdir myFolder && cd myFolder`
+-`conda activate barcoding`
+-`cp /path_to/BarcodeReader.plx .`
+-`cp /path_to/FindThreshold.plx .`
+-`mv fastq_files . `
+-`perl BarcodeReader.plx`
+-`perl FindThreshold.plx`
 
 
 ### DOI of this repository: (Link to the Zenodo DOI, generate a unqiue DOI for this repo)
