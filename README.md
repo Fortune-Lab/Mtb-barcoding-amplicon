@@ -19,7 +19,7 @@ This project includes two perl scripts to process the fastq files in the analysi
 
 ### Installation:
   - The tool versions can be manually installed in a unix like environment running bash. You can also install using a Anaconda environments.
-  - conda env create -f barcoding.yml
+  - `conda env create -f barcoding.yml`
   - In the script FindThreshold.plx change the path in `use lib '/n/boslfs02/LABS/sfortune_lab/Lab/envs/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
 
 
