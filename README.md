@@ -5,22 +5,22 @@ This project describes the computational workflow used to identify barcoded Myco
 
 **Please don't hesitate to contact us if there are any issues.**
 
-## File Guide
-This project includes two perl scripts to process the fastq files in the analysis of this work. 
-
-### Directory:
+### Directories:
 - ./scripts:
   - BarcodeReader.plx
   - FindThreshold.plx
-    
-### Tool versions:
+  - barcoding.yml
+- ./data:
+  - SraRunInfo.csv
+  - 
+### Prerequisites:
   - Requires Perl, seqtk https://github.com/lh3/seqtk and the perl module Math::Derivative https://metacpan.org/pod/Math::Derivative to be installed on your path.
   - To download the fastq files frm SRA you will also need to install sra-tools: https://github.com/ncbi/sra-tools.
 
 ### Installation:
   - The tool versions can be manually installed in a unix like environment running bash. You can also install using a Anaconda environments.
   - `conda env create -f barcoding.yml`
-  - In the script FindThreshold.plx change the path in `use lib '/n/boslfs02/LABS/sfortune_lab/Lab/envs/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
+  - In the script FindThreshold.plx change the path in `use lib '/my_path_to_environment/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
 
 ### Running the code:
 - `mkdir myFolder && cd myFolder`
@@ -32,7 +32,10 @@ This project includes two perl scripts to process the fastq files in the analysi
 - `perl FindThreshold.plx`
 - output directory_name_threshold_data.csv
   
-### Troubleshooting
+### Troubleshooting:
+- Verify read quality and counts.
+- Ensure that the prefix of the fastq file conforms to the expected pattern.
+- Accurate threshold is not always achieved and can require additional curration.
 
 ### Data:
 Data associated with the manuscript "CD4 T cells and CD8α+ lymphocytes are necessary for intravenous BCG-induced protection against tuberculosis in macaques" by Simonson et al. (2024, doi: https://doi.org/10.1101/2024.05.14.594183)
