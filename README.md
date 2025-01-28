@@ -15,10 +15,12 @@ This project describes the computational workflow used to identify barcoded Myco
   - 
 ### Prerequisites:
   - Requires Perl, seqtk https://github.com/lh3/seqtk and the perl module Math::Derivative https://metacpan.org/pod/Math::Derivative to be installed on your path.
-  - To download the fastq files frm SRA you will also need to install sra-tools: https://github.com/ncbi/sra-tools.
+  - To download the fastq files from SRA you will also need to install sra-tools: https://github.com/ncbi/sra-tools.
 
 ### Installation:
-  - The tool versions can be manually installed in a unix like environment running bash. You can also install using a Anaconda environments.
+  - Download the repository and copy the scripts to a directory on your path and make them executable `chmod u+x` or just copy them to your directory with your fastq files.
+  - 
+  - The tool versions can be manually installed in a unix like environment running bash or can be install using a Anaconda environments.
   - `conda env create -f barcoding.yml`
   - In the script FindThreshold.plx change the path in `use lib '/my_path_to_environment/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
 
@@ -28,13 +30,14 @@ This project describes the computational workflow used to identify barcoded Myco
 - `cp /path_to/BarcodeReader.plx .`
 - `cp /path_to/FindThreshold.plx .`
 - `mv fastq_files . `
+- The script expects fastqs as named in SRA: SRR32115076_1.fastq.gz.
 - `perl BarcodeReader.plx`
 - `perl FindThreshold.plx`
 - output directory_name_threshold_data.csv
   
 ### Troubleshooting:
 - Verify read quality and counts.
-- Ensure that the prefix of the fastq file conforms to the expected pattern.
+- Ensure that the prefix of the fastq file conforms to the expected pattern. if not you will have to modify the subroutine get_file() in both scripts to match your file name convention.
 - Accurate threshold is not always achieved and can require additional curration.
 
 ### Data:
