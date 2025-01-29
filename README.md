@@ -13,7 +13,7 @@ This project describes the computational workflow used to identify barcoded Myco
   - parallel.sh
   - barcoding.yml
 - ./data:
-  - SraRunInfo.csv
+  - PRJNA1215398_sra_accession_list.txt
   - 
 ### Prerequisites:
   - Requires Perl, seqtk https://github.com/lh3/seqtk and the perl module Math::Derivative https://metacpan.org/pod/Math::Derivative to be installed on your path.
@@ -23,20 +23,20 @@ This project describes the computational workflow used to identify barcoded Myco
   - Download the repository and copy the scripts to a directory on your path and make them executable `chmod u+x` or just copy them to your directory with your fastq files.
   - The tool versions can be manually installed in a unix like environment running bash or can be install using a Anaconda environments.
   - `conda env create -f barcoding.yml`
-  - In the script FindThreshold.plx change the path in `use lib '/my_path_to_environment/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
+  - If installed with conda, in the script FindThreshold.plx change the path in `use lib '/my_path_to_environment/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
+  - On a system with a native perl modules, delete or comment out '/my_path_to_environment/barcoding/lib/perl5/site_perl/';
 
 ### Download the fastq files:
   - Copy download.sh && parallel.sh into your data analysis directory.
   - Modify the script parallel.sh to the number of cpus you want to use.
-  - `chmod u+x download` 
+  - `chmod u+x download`
+  - Copy 'PRJNA1215398_sra_accession_list.txt' into your directory.
+  - `bash parallel.sh PRJNA1215398_sra_accession_list.txt`
 
 ### Running the code:
-- `mkdir myFolder && cd myFolder`
-- `conda activate barcoding`
 - `cp /path_to/BarcodeReader.plx .`
 - `cp /path_to/FindThreshold.plx .`
-- `mv fastq_files . `
-- The script expects fastqs as named in SRA: SRR32115076_1.fastq.gz.
+- The script expects fastqs in the working directory as named in SRA: SRR32115076_1.fastq.gz.
 - `perl BarcodeReader.plx`
 - `perl FindThreshold.plx`
 - output directory_name_threshold_data.csv
@@ -46,7 +46,7 @@ This project describes the computational workflow used to identify barcoded Myco
 - Ensure that the prefix of the fastq file conforms to the expected pattern. if not you will have to modify the subroutine get_file() in both scripts to match your file name convention.
 - Accurate threshold is not always achieved and can require additional curration.
 
-### Data:
+### Citation and associated data:
 Data associated with the manuscript "CD4 T cells and CD8α+ lymphocytes are necessary for intravenous BCG-induced protection against tuberculosis in macaques" by Simonson et al. (2024, doi: https://doi.org/10.1101/2024.05.14.594183)
 - SRA: https://www.ncbi.nlm.nih.gov/sra/PRJNA1215398
 - Fairdomhub: https://fairdomhub.org/studies/1283
