@@ -48,9 +48,9 @@ This project describes the computational workflow used to identify barcoded Myco
 - Accurate threshold is not always achieved and can require additional curration.
 
 ### Citation and associated data:
-Data associated with the manuscript "CD4 T cells and CD8α+ lymphocytes are necessary for intravenous BCG-induced protection against tuberculosis in macaques" by Simonson et al. (2024, doi: https://doi.org/10.1101/2024.05.14.594183)
-- SRA: https://www.ncbi.nlm.nih.gov/sra/PRJNA1215398
-- Fairdomhub: https://fairdomhub.org/studies/1283
+The script was used to analyze bacterial barcoding data associated with the manuscript "CD4 T cells and CD8α+ lymphocytes are necessary for intravenous BCG-induced protection against tuberculosis in macaques" by Simonson et al. (2024, doi: https://doi.org/10.1101/2024.05.14.594183)
+- The fastqs are on SRA at https://www.ncbi.nlm.nih.gov/sra/PRJNA1215398
+- The metadata is on Fairdomhub at https://fairdomhub.org/studies/1283
 
 ### DOI of this repository: (Link to the Zenodo DOI, generate a unqiue DOI for this repo)
 [![DOI](https://zenodo.org/)] **Zenodo will give you a link that you can paste here**
