@@ -51,5 +51,5 @@ This project describes the computational workflow used to identify barcoded Myco
 The script was used to analyze bacterial barcoding data associated with the manuscript "CD4 T cells and CD8α+ lymphocytes are necessary for intravenous BCG-induced protection against tuberculosis in macaques" by Simonson et al. (2024, doi: https://doi.org/10.1101/2024.05.14.594183)
 - The fastqs are on SRA at https://www.ncbi.nlm.nih.gov/sra/PRJNA1215398
 - The metadata is on Fairdomhub at https://fairdomhub.org/studies/1283
-- 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14766941.svg)(https://doi.org/10.5281/zenodo.14766941)
+  
+[DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14766941.svg)(https://doi.org/10.5281/zenodo.14766941)
