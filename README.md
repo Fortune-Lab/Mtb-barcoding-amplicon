@@ -52,4 +52,4 @@ The script was used to analyze bacterial barcoding data associated with the manu
 - The fastqs are on SRA at https://www.ncbi.nlm.nih.gov/sra/PRJNA1215398
 - The metadata is on Fairdomhub at https://fairdomhub.org/studies/1283
   
-[DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14766941.svg)(https://doi.org/10.5281/zenodo.14766941)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14766941.svg)](https://doi.org/10.5281/zenodo.14766941)
