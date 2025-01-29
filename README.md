@@ -14,7 +14,8 @@ This project describes the computational workflow used to identify barcoded Myco
   - barcoding.yml
 - ./data:
   - PRJNA1215398_sra_accession_list.txt
-  - 
+- barcoding.yml
+    
 ### Prerequisites:
   - Requires Perl, seqtk https://github.com/lh3/seqtk and the perl module Math::Derivative https://metacpan.org/pod/Math::Derivative to be installed on your path.
   - To download the fastq files from SRA you will also need to install sra-tools: https://github.com/ncbi/sra-tools. To speed things up a little gnu parallel: https://www.gnu.org/software/parallel/
