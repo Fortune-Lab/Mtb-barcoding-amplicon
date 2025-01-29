@@ -25,7 +25,7 @@ This project describes the computational workflow used to identify barcoded Myco
   - The tool versions can be manually installed in a unix like environment running bash or can be install using a Anaconda environments.
   - `conda env create -f barcoding.yml`
   - If installed with conda, in the script FindThreshold.plx change the path in `use lib '/my_path_to_environment/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
-  - On a system with a native perl modules, delete or comment out '/my_path_to_environment/barcoding/lib/perl5/site_perl/';
+  - On a system with a native perl module installation, delete or comment out '/my_path_to_environment/barcoding/lib/perl5/site_perl/' in the script FindThreshold.plx;
 
 ### Download the fastq files:
   - Copy download.sh && parallel.sh into your data analysis directory.
@@ -37,14 +37,14 @@ This project describes the computational workflow used to identify barcoded Myco
 ### Running the code:
 - `cp /path_to/BarcodeReader.plx .`
 - `cp /path_to/FindThreshold.plx .`
-- The script expects fastqs in the working directory as named in SRA: SRR32115076_1.fastq.gz.
+- The script expects FASTQ files in the working directory as named in SRA: SRR32115076_1.fastq.gz.
 - `perl BarcodeReader.plx`
 - `perl FindThreshold.plx`
-- output directory_name_threshold_data.csv
+- outputs the file: directory_name_threshold_data.csv
   
 ### Troubleshooting:
 - Verify read quality and counts.
-- Ensure that the prefix of the fastq file conforms to the expected pattern. if not you will have to modify the subroutine get_file() in both scripts to match your file name convention.
+- Ensure that the prefix of the FASTQ file conforms to the expected pattern. if not you will have to modify the subroutine get_file() in both scripts to match your file name convention.
 - Accurate threshold is not always achieved and can require additional curration.
 
 ### Citation and associated data:
