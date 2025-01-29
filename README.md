@@ -9,20 +9,26 @@ This project describes the computational workflow used to identify barcoded Myco
 - ./scripts:
   - BarcodeReader.plx
   - FindThreshold.plx
+  - download.sh
+  - parallel.sh
   - barcoding.yml
 - ./data:
   - SraRunInfo.csv
   - 
 ### Prerequisites:
   - Requires Perl, seqtk https://github.com/lh3/seqtk and the perl module Math::Derivative https://metacpan.org/pod/Math::Derivative to be installed on your path.
-  - To download the fastq files from SRA you will also need to install sra-tools: https://github.com/ncbi/sra-tools.
+  - To download the fastq files from SRA you will also need to install sra-tools: https://github.com/ncbi/sra-tools. To speed things up a little gnu parallel: https://www.gnu.org/software/parallel/
 
 ### Installation:
   - Download the repository and copy the scripts to a directory on your path and make them executable `chmod u+x` or just copy them to your directory with your fastq files.
-  - 
   - The tool versions can be manually installed in a unix like environment running bash or can be install using a Anaconda environments.
   - `conda env create -f barcoding.yml`
   - In the script FindThreshold.plx change the path in `use lib '/my_path_to_environment/barcoding/lib/perl5/site_perl/';` to the path of your environment installation.
+
+### Download the fastq files:
+  - Copy download.sh && parallel.sh into your data analysis directory.
+  - Modify the script parallel.sh to the number of cpus you want to use.
+  - `chmod u+x download` 
 
 ### Running the code:
 - `mkdir myFolder && cd myFolder`
