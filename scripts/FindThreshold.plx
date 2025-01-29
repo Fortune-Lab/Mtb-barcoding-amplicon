@@ -61,7 +61,7 @@ my %FILES = get_files();##############
 
 sub get_files {
 	my %hash = ();
-	my @files = glob("*reads.csv");
+	my @files = glob("*reads.tsv");
 	foreach my $file (@files) {
 		my @array = split/\_/, $file;
 		#my $string = join("_", @array[0,1]);
